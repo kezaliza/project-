@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111214">
+    <meta name="description" content="Browse all 40 phone accessories and everyday tech products from NE-electronics.">
+    <title>All Products | NE-electronics</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="product.css">
+</head>
+<body class="catalog-page product-catalog-page">
+    <main class="catalog-page-content">
+        <header class="catalog-page-header">
+            <a class="catalog-back-link" href="shop.html">← Back to homepage</a>
+            <div class="product-catalog-heading">
+                <div>
+                    <p class="eyebrow">Made for your everyday</p>
+                    <h1>All products</h1>
+                    <p class="catalog-description">Browse all 40 products in our collection.</p>
+                </div>
+                <div class="product-upload">
+                    <div class="product-upload-copy">
+                        <h2>Add a product photo</h2>
+                        <p>Choose an image to preview it in this gallery.</p>
+                    </div>
+                    <button class="product-upload-button" id="product-upload-button" type="button">＋ Add product photo</button>
+                    <input class="product-file-input" id="product-file-input" type="file" accept="image/*" multiple>
+                </div>
+            </div>
+        </header>
+        <p class="product-upload-status" id="product-upload-status" aria-live="polite"></p>
+        <div class="product-grid" aria-label="All products"></div>
+    </main>
+    <script src="shop.js" defer></script>
+</body>
+</html>

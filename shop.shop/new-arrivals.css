@@ -1,0 +1,103 @@
+.new-arrivals-page .catalog-page-header { margin-bottom: 24px; }
+
+.arrival-upload {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 12px;
+    padding: 20px 22px;
+    border: 1px solid #ead8e4;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.arrival-upload h2 {
+    margin: 0 0 5px;
+    color: #242424;
+    font: 700 16px/1.35 "Manrope", sans-serif;
+}
+
+.arrival-upload p {
+    margin: 0;
+    color: #707070;
+    font-size: 13px;
+}
+
+.arrival-upload-button {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    background: var(--green);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.arrival-upload-button:hover { background: var(--deep-green); transform: translateY(-1px); }
+.arrival-upload-button:focus-visible { outline: 3px solid #262626; outline-offset: 3px; }
+.arrival-file-input { display: none; }
+.arrival-upload-status { min-height: 20px; margin: 0 0 16px; color: #666; font-size: 12px; }
+.new-arrivals-page .arrival-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 20px;
+    margin-bottom: 20px;
+}
+
+.new-arrivals-page .arrival-grid .product-card {
+    overflow: hidden;
+    border: 1px solid #e7dede;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(50, 35, 40, .05);
+    transition: box-shadow .22s ease, transform .22s ease;
+}
+
+.new-arrivals-page .arrival-grid .product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(50, 35, 40, .12);
+}
+
+.new-arrivals-page .arrival-grid .product-image {
+    height: auto;
+    aspect-ratio: 1.2 / 1;
+    background: #f5f5f3;
+}
+
+.new-arrivals-page .arrival-grid .product-image img { object-fit: cover; }
+.new-arrivals-page .arrival-grid .product-info { padding: 14px; }
+.new-arrivals-page .arrival-grid .product-category { margin-bottom: 8px; color: #77797d; font-size: 12px; letter-spacing: .8px; }
+.new-arrivals-page .arrival-grid .product-info h3 { margin: 0 0 16px; color: #f080c5; font: 700 16px/1.35 "Manrope", sans-serif; }
+
+.new-arrivals-page .arrival-grid .product-info::after {
+    content: "Shop now";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 131px;
+    min-height: 45px;
+    border-radius: 5px;
+    color: #fff;
+    background: #f080c5;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+@media (max-width: 640px) {
+    .arrival-upload { align-items: flex-start; flex-direction: column; gap: 15px; padding: 17px; }
+    .arrival-upload-button { width: 100%; }
+    .new-arrivals-page .arrival-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .new-arrivals-page .arrival-grid .product-info { padding: 11px 10px; }
+    .new-arrivals-page .arrival-grid .product-info h3 { font-size: 13px; }
+    .new-arrivals-page .arrival-grid .product-info::after { width: 100%; min-height: 38px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .arrival-upload-button,
+    .new-arrivals-page .arrival-grid .product-card { transition: none; }
+    .arrival-upload-button:hover,
+    .new-arrivals-page .arrival-grid .product-card:hover { transform: none; }
+}

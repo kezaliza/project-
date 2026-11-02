@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="new-arrivals.css">
 </head>
 <body class="catalog-page new-arrivals-page">
+    <header class="site-header catalog-site-header">
+        <div class="header-inner">
+            <a class="brand" href="shop.html" aria-label="NE-electronics home">
+                <span class="brand-mark" aria-hidden="true">N<span>E</span></span>
+                <span>NE-electronics</span>
+            </a>
+            <a class="icon-link cart-link" href="shop.html#shop" aria-label="Shopping cart">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h2l2.2 11.1h10.8l2.1-7.8H6.3"></path><circle cx="9.5" cy="19.3" r="1"></circle><circle cx="17.5" cy="19.3" r="1"></circle></svg>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </header>
     <main class="catalog-page-content">
         <header class="catalog-page-header">
             <a class="catalog-back-link" href="shop.html">← Back to homepage</a>
@@ -18,6 +30,12 @@
             <p class="catalog-description">Discover the latest additions to our collection.</p>
         </header>
 
+        <nav class="arrival-categories" aria-label="Filter new arrivals by category">
+            <button class="arrival-category-filter is-active" type="button" data-category="all" aria-pressed="true">All new arrivals</button>
+            <button class="arrival-category-filter" type="button" data-category="antblock" aria-pressed="false">Antblock</button>
+            <button class="arrival-category-filter" type="button" data-category="smart-watch" aria-pressed="false">Smart watch</button>
+        </nav>
+        <p class="arrival-filter-status" id="arrival-filter-status" aria-live="polite">Showing all new arrivals.</p>
         <section class="arrival-upload" aria-labelledby="arrival-upload-title">
             <div>
                 <h2 id="arrival-upload-title">Have you known that we have new products ?</h2>
@@ -74,5 +92,6 @@
         </section>
     </main>
     <script src="new-arrivals.js" defer></script>
+    <script src="cart.js" defer></script>
 </body>
 </html>

@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="product.css">
 </head>
 <body class="catalog-page product-catalog-page">
+    <header class="site-header catalog-site-header">
+        <div class="header-inner">
+            <a class="brand" href="shop.html" aria-label="NE-electronics home">
+                <span class="brand-mark" aria-hidden="true">N<span>E</span></span>
+                <span>NE-electronics</span>
+            </a>
+            <a class="icon-link cart-link" href="shop.html#shop" aria-label="Shopping cart">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h2l2.2 11.1h10.8l2.1-7.8H6.3"></path><circle cx="9.5" cy="19.3" r="1"></circle><circle cx="17.5" cy="19.3" r="1"></circle></svg>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </header>
     <main class="catalog-page-content">
         <header class="catalog-page-header">
             <a class="catalog-back-link" href="shop.html">← Back to homepage</a>
@@ -29,9 +41,21 @@
                 </div>
             </div>
         </header>
+        <nav class="product-categories" aria-label="Filter products by category">
+            <button class="category-filter is-active" type="button" data-category="all" aria-pressed="true">All products</button>
+            <button class="category-filter" type="button" data-category="phone-cover" aria-pressed="false">Phone cover</button>
+            <button class="category-filter" type="button" data-category="power-bank" aria-pressed="false">Power bank</button>
+            <button class="category-filter" type="button" data-category="phone-holder" aria-pressed="false">Phone holder</button>
+            <button class="category-filter" type="button" data-category="bluetooth" aria-pressed="false">Bluetooth</button>
+            <button class="category-filter" type="button" data-category="camera-lens" aria-pressed="false">Camera lens</button>
+            <button class="category-filter" type="button" data-category="earphones" aria-pressed="false">Earphones</button>
+            <button class="category-filter" type="button" data-category="usb-and-charger" aria-pressed="false">USB &amp; charger</button>
+        </nav>
+        <p class="product-filter-status" id="product-filter-status" aria-live="polite">Showing all products.</p>
         <p class="product-upload-status" id="product-upload-status" aria-live="polite"></p>
         <div class="product-grid" aria-label="All products"></div>
     </main>
     <script src="shop.js" defer></script>
+    <script src="cart.js" defer></script>
 </body>
 </html>

@@ -13,13 +13,18 @@ function getProductCategory(number) {
     if (number <= 20) return "Bluetooth";
     if (number <= 30) return "Camera lens";
     if (number <= 35) return "Earphones";
-    return "USB and charger";
+    return "USB & charger";
+}
+
+function getCategoryKey(category) {
+    return category.toLowerCase().replaceAll(" ", "-").replace("&", "and");
 }
 
 function createProductCard(number) {
     const card = document.createElement("article");
     card.className = "product-card";
     const productCategory = getProductCategory(number);
+    card.dataset.category = getCategoryKey(productCategory);
 
     const productHref = document.body.classList.contains("catalog-page") ? "shop.html#contact" : "#contact";
 
@@ -45,12 +50,13 @@ function createProductCard(number) {
     const bottom = document.createElement("div");
     bottom.className = "product-bottom";
 
-    const shopLink = document.createElement("a");
-    shopLink.className = "shop-button";
-    shopLink.href = productHref;
-    shopLink.textContent = "Shop now";
+    const buyButton = document.createElement("button");
+    buyButton.className = "shop-button buy-button";
+    buyButton.type = "button";
+    buyButton.dataset.productId = String(number);
+    buyButton.textContent = "Buy";
 
-    bottom.append(shopLink);
+    bottom.append(buyButton);
     info.append(category, name, bottom);
     card.append(imageLink, info);
 
@@ -76,6 +82,34 @@ function initializeCatalog() {
     const productGrid = document.querySelector(".catalog-page .product-grid");
     renderProducts(productGrid, 1, 40);
 
+    const categoryFilters = document.querySelector(".product-categories");
+    const filterStatus = document.querySelector("#product-filter-status");
+
+    categoryFilters.addEventListener("click", (event) => {
+        const selectedFilter = event.target.closest("button[data-category]");
+
+        if (!selectedFilter) {
+            return;
+        }
+
+        const selectedCategory = selectedFilter.dataset.category;
+        const visibleCount = Array.from(productGrid.children).filter((card) => {
+            const isVisible = selectedCategory === "all" || card.dataset.category === selectedCategory;
+            card.hidden = !isVisible;
+            return isVisible;
+        }).length;
+
+        categoryFilters.querySelectorAll("button[data-category]").forEach((button) => {
+            const isActive = button === selectedFilter;
+            button.classList.toggle("is-active", isActive);
+            button.setAttribute("aria-pressed", String(isActive));
+        });
+
+        filterStatus.textContent = selectedCategory === "all"
+            ? "Showing all products."
+            : `Showing ${visibleCount} ${selectedFilter.textContent} product${visibleCount === 1 ? "" : "s"}.`;
+    });
+
     const uploadButton = document.querySelector("#product-upload-button");
     const fileInput = document.querySelector("#product-file-input");
     const uploadStatus = document.querySelector("#product-upload-status");
@@ -99,6 +133,7 @@ function initializeCatalog() {
         const addedCards = imageFiles.map((file) => {
             const card = document.createElement("article");
             card.className = "product-card";
+            card.dataset.category = "other";
 
             const imageLink = document.createElement("a");
             imageLink.className = "product-image";
@@ -125,6 +160,10 @@ function initializeCatalog() {
         });
 
         productGrid.append(...addedCards);
+        const activeFilter = categoryFilters.querySelector(".category-filter.is-active");
+        if (activeFilter && activeFilter.dataset.category !== "all") {
+            addedCards.forEach((card) => { card.hidden = true; });
+        }
         uploadStatus.textContent = `${imageFiles.length} image${imageFiles.length === 1 ? "" : "s"} added to this gallery preview.`;
         fileInput.value = "";
     });
@@ -134,8 +173,38 @@ function initializeHome() {
     const productGrid = document.querySelector(".product-grid");
     renderProducts(productGrid, 1, 20);
 
+    const categoryMenuToggle = document.querySelector(".category-menu-toggle");
+    const categoryMenu = document.querySelector("#category-menu");
     const menuToggle = document.querySelector(".menu-toggle");
     const navigation = document.querySelector(".main-nav");
+
+    function setCategoryMenuOpen(isOpen) {
+        categoryMenuToggle.setAttribute("aria-expanded", String(isOpen));
+        categoryMenu.hidden = !isOpen;
+    }
+
+    categoryMenuToggle.addEventListener("click", () => {
+        setCategoryMenuOpen(categoryMenuToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    categoryMenu.addEventListener("click", (event) => {
+        if (event.target.closest("a")) {
+            setCategoryMenuOpen(false);
+        }
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!categoryMenu.hidden && !event.target.closest(".category-menu, .category-menu-toggle")) {
+            setCategoryMenuOpen(false);
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !categoryMenu.hidden) {
+            setCategoryMenuOpen(false);
+            categoryMenuToggle.focus();
+        }
+    });
 
     menuToggle.addEventListener("click", () => {
         const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
@@ -159,7 +228,7 @@ function initializeHome() {
 
         const label = link.textContent.replace("→", "").trim();
 
-        if (label === "Shop" || label === "Shop now") {
+        if (label === "Shop" || label === "Shop now" || label === "Buy") {
             event.preventDefault();
             openCatalog();
         }
@@ -167,9 +236,14 @@ function initializeHome() {
 
     document.querySelector(".newsletter-form").addEventListener("submit", (event) => {
         event.preventDefault();
-        const emailInput = document.querySelector("#email");
-        document.querySelector(".form-message").textContent = `Thanks for subscribing, ${emailInput.value}!`;
-        event.target.reset();
+        const form = event.currentTarget;
+        const emailInput = form.querySelector("#email");
+        const subject = "Please contact me";
+        const body = `Hello,\n\nPlease contact me with updates and offers.\n\nMy email address: ${emailInput.value}`;
+        const mailtoUrl = `mailto:kezaliza379@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        form.querySelector(".form-message").textContent = "Opening your email app to send your message.";
+        window.location.href = mailtoUrl;
     });
 }
 

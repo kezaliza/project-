@@ -1,5 +1,39 @@
 .new-arrivals-page .catalog-page-header { margin-bottom: 24px; }
 
+.arrival-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0 0 10px;
+}
+
+.arrival-category-filter {
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid #ead8e4;
+    border-radius: 999px;
+    color: #524952;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.arrival-category-filter:hover,
+.arrival-category-filter.is-active {
+    border-color: var(--green);
+    color: #fff;
+    background: var(--green);
+}
+
+.arrival-category-filter:focus-visible {
+    outline: 3px solid #262626;
+    outline-offset: 3px;
+}
+
+.arrival-filter-status { min-height: 18px; margin: 0 0 12px; color: #707070; font-size: 12px; }
+
 .arrival-upload {
     display: flex;
     align-items: center;
@@ -87,6 +121,7 @@
 }
 
 @media (max-width: 640px) {
+    .arrival-category-filter { min-height: 36px; padding: 0 12px; }
     .arrival-upload { align-items: flex-start; flex-direction: column; gap: 15px; padding: 17px; }
     .arrival-upload-button { width: 100%; }
     .new-arrivals-page .arrival-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -96,6 +131,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .arrival-category-filter,
     .arrival-upload-button,
     .new-arrivals-page .arrival-grid .product-card { transition: none; }
     .arrival-upload-button:hover,

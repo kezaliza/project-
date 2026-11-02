@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111214">
+    <meta name="description" content="Review your shopping cart and remove products whenever you like.">
+    <title>Your Cart | NE-electronics</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body class="catalog-page cart-page">
+    <header class="site-header catalog-site-header">
+        <div class="header-inner">
+            <a class="brand" href="shop.html" aria-label="NE-electronics home">
+                <span class="brand-mark" aria-hidden="true">N<span>E</span></span>
+                <span>NE-electronics</span>
+            </a>
+            <a class="icon-link cart-link" href="cart.html" aria-label="Shopping cart">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h2l2.2 11.1h10.8l2.1-7.8H6.3"></path><circle cx="9.5" cy="19.3" r="1"></circle><circle cx="17.5" cy="19.3" r="1"></circle></svg>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+    <main class="catalog-page-content">
+        <header class="catalog-page-header">
+            <a class="catalog-back-link" href="shop.html">← Continue shopping</a>
+            <p class="eyebrow">Your selection</p>
+            <h1>Your shopping cart</h1>
+            <p class="catalog-description">Change quantities or remove products before you continue shopping.</p>
+        </header>
+        <section class="cart-content" aria-label="Shopping cart">
+            <div class="cart-items" id="cart-items" aria-live="polite"></div>
+            <div class="cart-summary" id="cart-summary" aria-live="polite"></div>
+        </section>
+    </main>
+    <script src="pricing.js" defer></script>
+    <script src="cart.js" defer></script>
+    <script src="product-descriptions.js" defer></script>
+</body>
+</html>

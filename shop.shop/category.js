@@ -21,6 +21,7 @@ const firstProductImages = {
 function createCategoryProduct(category, number) {
     const card = document.createElement("article");
     card.className = "product-card";
+    card.dataset.productId = String(number);
 
     const imageLink = document.createElement("a");
     imageLink.className = "product-image";
@@ -44,13 +45,17 @@ function createCategoryProduct(category, number) {
     const bottom = document.createElement("div");
     bottom.className = "product-bottom";
 
+    const price = document.createElement("span");
+    price.className = "product-price";
+    price.textContent = getProductPrice(number);
+
     const buyButton = document.createElement("button");
     buyButton.className = "shop-button buy-button";
     buyButton.type = "button";
     buyButton.dataset.productId = String(number);
     buyButton.textContent = "Buy";
 
-    bottom.append(buyButton);
+    bottom.append(price, buyButton);
     info.append(categoryName, productName, bottom);
     card.append(imageLink, info);
     return card;

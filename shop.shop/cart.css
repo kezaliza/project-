@@ -1,0 +1,64 @@
+.cart-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 85% 0, rgba(240, 128, 197, .12), transparent 34rem),
+        #f7f5f6;
+}
+
+.cart-page .catalog-page-content { max-width: 900px; }
+.cart-page .catalog-page-header { margin-bottom: 24px; }
+.cart-content { display: grid; gap: 14px; }
+.cart-items { display: grid; gap: 12px; }
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    padding: 14px;
+    border: 1px solid #eee8ed;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(40, 30, 38, .035);
+}
+
+.cart-item-image {
+    width: 112px;
+    height: 112px;
+    border-radius: 6px;
+}
+
+.cart-item-details .product-category { margin-bottom: 6px; color: #8b818a; }
+.cart-item-details h2 { margin: 0 0 5px; color: #302b32; font: 700 16px/1.35 "Manrope", sans-serif; }
+.cart-item-unit-price { margin: 0; color: #77717a; font-size: 13px; }
+.cart-quantity-controls { display: inline-flex; align-items: center; gap: 12px; margin-top: 12px; }
+.cart-quantity-controls button {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    place-items: center;
+    border: 1px solid #e8dce5;
+    border-radius: 5px;
+    color: #302b32;
+    background: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+.cart-quantity-controls button:hover { border-color: var(--green); color: var(--green); }
+.cart-quantity-controls button:focus-visible,
+.cart-remove-button:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+.cart-item-quantity { min-width: 18px; color: #302b32; text-align: center; font-weight: 700; }
+.cart-remove-button { margin-left: 12px; padding: 7px 10px; border: 0; color: #a43d58; background: transparent; font-size: 12px; font-weight: 700; cursor: pointer; }
+.cart-remove-button:hover { text-decoration: underline; }
+.cart-item-subtotal { margin: 0; color: #302b32; font-size: 16px; font-weight: 700; white-space: nowrap; }
+.cart-empty-message { margin: 0; padding: 32px 20px; border: 1px solid #eee8ed; border-radius: 10px; color: #77717a; background: #fff; text-align: center; }
+.cart-summary { display: flex; justify-content: flex-end; padding: 15px 4px; border-top: 1px solid #e8dce5; }
+.cart-total { margin: 0; color: #302b32; font-size: 20px; font-weight: 800; }
+
+@media (max-width: 560px) {
+    .cart-item { grid-template-columns: 82px minmax(0, 1fr); gap: 12px; padding: 10px; }
+    .cart-item-image { width: 82px; height: 90px; }
+    .cart-item-details h2 { font-size: 14px; }
+    .cart-item-subtotal { grid-column: 2; justify-self: start; margin-top: -6px; }
+    .cart-remove-button { margin-left: 4px; }
+}

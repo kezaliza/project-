@@ -11,6 +11,11 @@ function getArrivalCategoryKey(card) {
 
 arrivalGrid.querySelectorAll(".product-card").forEach((card) => {
     card.dataset.category = getArrivalCategoryKey(card);
+
+    const price = document.createElement("p");
+    price.className = "product-price";
+    price.textContent = getProductPrice(Number(card.dataset.productId));
+    card.querySelector(".product-info").append(price);
 });
 
 categoryFilters.addEventListener("click", (event) => {

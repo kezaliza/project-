@@ -105,6 +105,7 @@
 .new-arrivals-page .arrival-grid .product-info { padding: 14px; }
 .new-arrivals-page .arrival-grid .product-category { margin-bottom: 8px; color: #77797d; font-size: 12px; letter-spacing: .8px; }
 .new-arrivals-page .arrival-grid .product-info h3 { margin: 0 0 16px; color: #f080c5; font: 700 16px/1.35 "Manrope", sans-serif; }
+.new-arrivals-page .arrival-grid .product-price { margin-bottom: 16px; }
 
 .new-arrivals-page .arrival-grid .product-info::after {
     content: "Shop now";

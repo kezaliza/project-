@@ -1,0 +1,59 @@
+.register-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 85% 0, rgba(240, 128, 197, .15), transparent 34rem),
+        #f7f5f6;
+}
+
+.register-content {
+    width: min(520px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 32px 0 64px;
+}
+
+.register-content .catalog-back-link { margin-bottom: 22px; }
+
+.register-card {
+    padding: 32px;
+    border: 1px solid rgba(240, 128, 197, .2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .92);
+    box-shadow: 0 12px 35px rgba(50, 30, 43, .07);
+}
+
+.register-card .eyebrow { color: var(--green); }
+.register-card h1 { margin: 0; color: #302b32; font: 800 clamp(28px, 6vw, 36px)/1.15 "Manrope", sans-serif; letter-spacing: -1px; }
+.register-intro { margin: 10px 0 22px; color: #77717a; font-size: 14px; }
+
+.register-notice {
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    border: 1px solid #ead8e4;
+    border-radius: 6px;
+    color: #625b63;
+    background: #fcf7fb;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.register-form { display: grid; gap: 9px; }
+.register-form label { margin-top: 5px; color: #302b32; font-size: 13px; font-weight: 700; }
+.register-form input {
+    width: 100%;
+    min-height: 45px;
+    padding: 0 12px;
+    border: 1px solid #ded6dc;
+    border-radius: 5px;
+    color: #302b32;
+    background: #fff;
+}
+.register-form input:focus { border-color: var(--green); outline: 3px solid rgba(240, 128, 197, .2); }
+.password-hint { margin: -4px 0 2px; color: #77717a; font-size: 11px; }
+.register-submit { width: 100%; margin-top: 10px; }
+.register-status { min-height: 0; margin: 0; color: #625b63; font-size: 13px; line-height: 1.6; }
+.register-status:not(:empty) { margin-top: 5px; }
+
+@media (max-width: 640px) {
+    .register-content { padding-top: 22px; }
+    .register-card { padding: 23px 20px; }
+}

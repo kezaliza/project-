@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111214">
+    <meta name="description" content="Create your NE-electronics customer account.">
+    <title>Create Account | NE-electronics</title>
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+<body class="catalog-page register-page">
+    <header class="site-header catalog-site-header">
+        <div class="header-inner">
+            <a class="brand" href="shop.html" aria-label="NE-electronics home">
+                <span class="brand-mark" aria-hidden="true">N<span>E</span></span>
+                <span>NE-electronics</span>
+            </a>
+            <div class="header-actions">
+                <a class="icon-link account-link" href="register.html" aria-label="Create account" aria-current="page">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.3"></circle><path d="M5.5 20c.5-3.4 2.8-5.3 6.5-5.3s6 1.9 6.5 5.3"></path></svg>
+                </a>
+                <a class="icon-link cart-link" href="cart.html" aria-label="Shopping cart">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h2l2.2 11.1h10.8l2.1-7.8H6.3"></path><circle cx="9.5" cy="19.3" r="1"></circle><circle cx="17.5" cy="19.3" r="1"></circle></svg>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+    <main class="register-content">
+        <a class="catalog-back-link" href="shop.html">← Back to shopping</a>
+        <section class="register-card" aria-labelledby="register-title">
+            <p class="eyebrow">Welcome to NE-electronics</p>
+            <h1 id="register-title">Create your account</h1>
+            <p class="register-intro">Join us to make your next visit easier.</p>
+
+            <div class="register-notice" role="note">
+                This is a registration preview. No account will be created and your information will not be saved or sent. Please do not enter a password you use elsewhere.
+            </div>
+
+            <form class="register-form" id="register-form">
+                <label for="register-name">Full name</label>
+                <input id="register-name" name="name" type="text" autocomplete="name" required>
+
+                <label for="register-email">Email address</label>
+                <input id="register-email" name="email" type="email" autocomplete="email" required>
+
+                <label for="register-password">Password</label>
+                <input id="register-password" name="password" type="password" autocomplete="new-password" minlength="8" required aria-describedby="password-hint">
+                <p class="password-hint" id="password-hint">Use at least 8 characters for this preview.</p>
+
+                <label for="register-confirm-password">Confirm password</label>
+                <input id="register-confirm-password" name="confirm-password" type="password" autocomplete="new-password" minlength="8" required>
+
+                <button class="button button-green register-submit" type="submit">Preview registration</button>
+                <p class="register-status" id="register-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+    <script src="cart.js" defer></script>
+    <script src="register.js" defer></script>
+</body>
+</html>

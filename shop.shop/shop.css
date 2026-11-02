@@ -567,7 +567,6 @@ body.catalog-page { color: #242424; background: #f5f6f3; }
     .main-nav a { padding: 12px 0; font-size: 13px; }
     .header-actions { margin-left: auto; gap: 14px; }
     .category-menu { right: 16px; }
-    .account-link { display: none; }
     .hero { min-height: 520px; background-position: 56% 28%; }
     .hero-shade { background: linear-gradient(0deg, rgba(5,9,15,.89) 0%, rgba(5,9,15,.52) 50%, rgba(5,9,15,.05) 100%); }
     .hero-content { width: calc(100% - 40px); padding-top: 302px; padding-bottom: 76px; }

@@ -10,7 +10,7 @@
 .arrival-category-filter {
     min-height: 38px;
     padding: 0 14px;
-    border: 1px solid #ead8e4;
+    border: 1px solid #E5BCA9;
     border-radius: 999px;
     color: #524952;
     background: #fff;
@@ -23,7 +23,7 @@
 .arrival-category-filter:hover,
 .arrival-category-filter.is-active {
     border-color: var(--green);
-    color: #fff;
+    color: #242126;
     background: var(--green);
 }
 
@@ -41,7 +41,7 @@
     gap: 24px;
     margin-bottom: 12px;
     padding: 20px 22px;
-    border: 1px solid #ead8e4;
+    border: 1px solid #E5BCA9;
     border-radius: 8px;
     background: #fff;
 }
@@ -64,14 +64,14 @@
     padding: 0 18px;
     border: 0;
     border-radius: 5px;
-    color: #fff;
+    color: #242126;
     background: var(--green);
     font-weight: 700;
     cursor: pointer;
     transition: background .2s ease, transform .2s ease;
 }
 
-.arrival-upload-button:hover { background: var(--deep-green); transform: translateY(-1px); }
+.arrival-upload-button:hover { color: #fff; background: var(--deep-green); transform: translateY(-1px); }
 .arrival-upload-button:focus-visible { outline: 3px solid #262626; outline-offset: 3px; }
 .arrival-file-input { display: none; }
 .arrival-upload-status { min-height: 20px; margin: 0 0 16px; color: #666; font-size: 12px; }
@@ -83,7 +83,7 @@
 
 .new-arrivals-page .arrival-grid .product-card {
     overflow: hidden;
-    border: 1px solid #e7dede;
+    border: 1px solid #E5BCA9;
     border-radius: 8px;
     background: #fff;
     box-shadow: 0 3px 10px rgba(50, 35, 40, .05);
@@ -98,28 +98,14 @@
 .new-arrivals-page .arrival-grid .product-image {
     height: auto;
     aspect-ratio: 1.2 / 1;
-    background: #f5f5f3;
+    background: #FBEAD6;
 }
 
 .new-arrivals-page .arrival-grid .product-image img { object-fit: cover; }
 .new-arrivals-page .arrival-grid .product-info { padding: 14px; }
 .new-arrivals-page .arrival-grid .product-category { margin-bottom: 8px; color: #77797d; font-size: 12px; letter-spacing: .8px; }
-.new-arrivals-page .arrival-grid .product-info h3 { margin: 0 0 16px; color: #f080c5; font: 700 16px/1.35 "Manrope", sans-serif; }
+.new-arrivals-page .arrival-grid .product-info h3 { margin: 0 0 16px; color: #302b32; font: 700 16px/1.35 "Manrope", sans-serif; }
 .new-arrivals-page .arrival-grid .product-price { margin-bottom: 16px; }
-
-.new-arrivals-page .arrival-grid .product-info::after {
-    content: "Shop now";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 131px;
-    min-height: 45px;
-    border-radius: 5px;
-    color: #fff;
-    background: #f080c5;
-    font-size: 15px;
-    font-weight: 700;
-}
 
 @media (max-width: 640px) {
     .arrival-category-filter { min-height: 36px; padding: 0 12px; }
@@ -128,7 +114,6 @@
     .new-arrivals-page .arrival-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .new-arrivals-page .arrival-grid .product-info { padding: 11px 10px; }
     .new-arrivals-page .arrival-grid .product-info h3 { font-size: 13px; }
-    .new-arrivals-page .arrival-grid .product-info::after { width: 100%; min-height: 38px; font-size: 13px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

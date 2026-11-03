@@ -19,6 +19,7 @@ productDescriptionDialog.innerHTML = `
     <div class="product-description-copy">
         <p class="product-description-category"></p>
         <h2 id="product-description-title"></h2>
+        <p class="product-description-price"></p>
         <p class="product-description-text"></p>
     </div>
 `;
@@ -27,6 +28,7 @@ document.body.append(productDescriptionDialog);
 const descriptionImage = productDescriptionDialog.querySelector(".product-description-image");
 const descriptionCategory = productDescriptionDialog.querySelector(".product-description-category");
 const descriptionTitle = productDescriptionDialog.querySelector("#product-description-title");
+const descriptionPrice = productDescriptionDialog.querySelector(".product-description-price");
 const descriptionText = productDescriptionDialog.querySelector(".product-description-text");
 const descriptionCloseButton = productDescriptionDialog.querySelector(".product-description-close");
 let descriptionTrigger;
@@ -42,7 +44,7 @@ document.addEventListener("click", (event) => {
 
     const category = productCard.querySelector(".product-category").textContent;
     const image = imageLink.querySelector("img");
-    const name = productCard.querySelector("h3").textContent;
+    const name = productCard.querySelector("h3, h2").textContent;
 
     if (!productDescriptions[category]) {
         throw new Error(`No product description is defined for category "${category}".`);
@@ -54,6 +56,7 @@ document.addEventListener("click", (event) => {
     descriptionImage.alt = image.alt;
     descriptionCategory.textContent = category;
     descriptionTitle.textContent = name;
+    descriptionPrice.textContent = getProductPrice(productId);
     descriptionText.textContent = productDescriptions[category];
     productDescriptionDialog.showModal();
     descriptionCloseButton.focus();

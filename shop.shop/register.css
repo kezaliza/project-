@@ -1,8 +1,8 @@
 .register-page {
     min-height: 100vh;
     background:
-        radial-gradient(ellipse at 85% 0, rgba(240, 128, 197, .15), transparent 34rem),
-        #f7f5f6;
+        radial-gradient(ellipse at 85% 0, rgba(200, 125, 135, .15), transparent 34rem),
+        #FBEAD6;
 }
 
 .register-content {
@@ -15,7 +15,7 @@
 
 .register-card {
     padding: 32px;
-    border: 1px solid rgba(240, 128, 197, .2);
+    border: 1px solid rgba(200, 125, 135, .2);
     border-radius: 12px;
     background: rgba(255, 255, 255, .92);
     box-shadow: 0 12px 35px rgba(50, 30, 43, .07);
@@ -28,10 +28,10 @@
 .register-notice {
     margin-bottom: 22px;
     padding: 12px 14px;
-    border: 1px solid #ead8e4;
+    border: 1px solid #E5BCA9;
     border-radius: 6px;
     color: #625b63;
-    background: #fcf7fb;
+    background: #FBEAD6;
     font-size: 12px;
     line-height: 1.6;
 }
@@ -42,12 +42,12 @@
     width: 100%;
     min-height: 45px;
     padding: 0 12px;
-    border: 1px solid #ded6dc;
+    border: 1px solid #E5BCA9;
     border-radius: 5px;
     color: #302b32;
     background: #fff;
 }
-.register-form input:focus { border-color: var(--green); outline: 3px solid rgba(240, 128, 197, .2); }
+.register-form input:focus { border-color: var(--green); outline: 3px solid rgba(200, 125, 135, .2); }
 .password-hint { margin: -4px 0 2px; color: #77717a; font-size: 11px; }
 .register-submit { width: 100%; margin-top: 10px; }
 .register-status { min-height: 0; margin: 0; color: #625b63; font-size: 13px; line-height: 1.6; }

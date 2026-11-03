@@ -1,14 +1,14 @@
 .category-page {
     min-height: 100vh;
     background:
-        radial-gradient(ellipse at 85% 0, rgba(240, 128, 197, .12), transparent 34rem),
-        #f7f5f6;
+        radial-gradient(ellipse at 85% 0, rgba(200, 125, 135, .12), transparent 34rem),
+        #FBEAD6;
 }
 
 .category-page .catalog-page-content { padding-top: 30px; }
 .category-page .catalog-page-header { margin-bottom: 24px; }
 .category-page .category-product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-.category-page .product-card { border-color: #eee8ed; border-radius: 10px; box-shadow: 0 4px 14px rgba(40, 30, 38, .035); }
+.category-page .product-card { border-color: #E5BCA9; border-radius: 10px; box-shadow: 0 4px 14px rgba(40, 30, 38, .035); }
 .category-page .product-card:hover { box-shadow: 0 14px 30px rgba(40, 30, 38, .12); }
 .category-page .product-image { height: auto; aspect-ratio: 1 / 1; }
 .category-page .product-info { padding: 15px; }

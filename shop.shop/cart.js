@@ -1,4 +1,5 @@
 const cartStorageKey = "ne-electronics-cart";
+const wishlistStorageKey = "ne-electronics-wishlist";
 const cartProductImageFiles = {
     1: "1%20-%20Copy.jpg",
     2: "2%20-%20Copy.jpg",
@@ -19,8 +20,11 @@ const cartCategories = [
 ];
 let cartItems = {};
 let cartStorageAvailable = true;
+let wishlistItems = [];
+let wishlistStorageAvailable = true;
 const cartContents = document.querySelector("#cart-items");
 const cartSummary = document.querySelector("#cart-summary");
+const wishlistContents = document.querySelector("#wishlist-items");
 
 const cartAnnouncement = document.createElement("p");
 cartAnnouncement.className = "sr-only";
@@ -64,6 +68,53 @@ function updateCartBadge() {
     document.querySelectorAll(".cart-link").forEach((link) => {
         link.setAttribute("aria-label", `Shopping cart, ${itemCount} item${itemCount === 1 ? "" : "s"}`);
     });
+
+    updateWishlistBadge();
+}
+
+function readWishlist(value) {
+    if (!value) {
+        return [];
+    }
+
+    const parsedWishlist = JSON.parse(value);
+    if (!Array.isArray(parsedWishlist) || parsedWishlist.some((productId) => !Number.isInteger(productId) || productId < 1 || productId > 50)) {
+        throw new Error("Saved wishlist data is not valid.");
+    }
+
+    return [...new Set(parsedWishlist)];
+}
+
+function updateWishlistBadge() {
+    document.querySelectorAll(".wishlist-count").forEach((badge) => {
+        badge.textContent = String(wishlistItems.length);
+    });
+
+    document.querySelectorAll(".wishlist-link").forEach((link) => {
+        link.setAttribute("aria-label", `Wishlist, ${wishlistItems.length} saved product${wishlistItems.length === 1 ? "" : "s"}`);
+    });
+
+    document.querySelectorAll(".save-button[data-product-id]").forEach((button) => {
+        const isSaved = wishlistItems.includes(Number(button.dataset.productId));
+        const productName = button.closest(".product-card").querySelector("h3, h2").textContent;
+        button.classList.toggle("is-saved", isSaved);
+        button.setAttribute("aria-pressed", String(isSaved));
+        button.setAttribute("aria-label", `${isSaved ? "Remove" : "Save"} ${productName} ${isSaved ? "from" : "to"} wishlist`);
+        button.textContent = isSaved ? "♥ Saved" : "♡ Save";
+    });
+}
+
+function saveWishlist() {
+    if (!wishlistStorageAvailable) {
+        return;
+    }
+
+    try {
+        localStorage.setItem(wishlistStorageKey, JSON.stringify(wishlistItems));
+    } catch (error) {
+        wishlistStorageAvailable = false;
+        announceCartMessage("Your wishlist changed for this session, but could not be saved in this browser.");
+    }
 }
 
 function getCartProductCategory(productId) {
@@ -181,6 +232,75 @@ function renderCartPage() {
     cartSummary.replaceChildren(totalLabel);
 }
 
+function createWishlistItem(productId) {
+    const category = getCartProductCategory(productId);
+    const item = document.createElement("article");
+    item.className = "product-card wishlist-item";
+    item.dataset.productId = String(productId);
+
+    const imageLink = document.createElement("a");
+    imageLink.className = "product-image";
+    imageLink.href = "shop.html#shop";
+
+    const image = document.createElement("img");
+    image.src = `../public/${cartProductImageFiles[productId] || `${productId}.jpg`}`;
+    image.alt = `${category} ${productId}`;
+    imageLink.append(image);
+
+    const info = document.createElement("div");
+    info.className = "product-info";
+
+    const categoryLabel = document.createElement("p");
+    categoryLabel.className = "product-category";
+    categoryLabel.textContent = category;
+
+    const name = document.createElement("h2");
+    name.textContent = `${category} ${productId}`;
+
+    const price = document.createElement("p");
+    price.className = "product-price";
+    price.textContent = getProductPrice(productId);
+
+    const actions = document.createElement("div");
+    actions.className = "wishlist-item-actions";
+
+    const buyButton = document.createElement("button");
+    buyButton.className = "shop-button buy-button";
+    buyButton.type = "button";
+    buyButton.dataset.productId = String(productId);
+    buyButton.textContent = "Buy now";
+
+    const removeButton = document.createElement("button");
+    removeButton.className = "save-button is-saved";
+    removeButton.type = "button";
+    removeButton.dataset.productId = String(productId);
+    removeButton.dataset.wishlistAction = "remove";
+    removeButton.setAttribute("aria-label", `Remove ${category} ${productId} from wishlist`);
+    removeButton.setAttribute("aria-pressed", "true");
+    removeButton.textContent = "♥ Saved";
+
+    actions.append(buyButton, removeButton);
+    info.append(categoryLabel, name, price, actions);
+    item.append(imageLink, info);
+    return item;
+}
+
+function renderWishlistPage() {
+    if (!wishlistContents) {
+        return;
+    }
+
+    if (wishlistItems.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.className = "wishlist-empty-message";
+        emptyMessage.textContent = "Your wishlist is empty. Save products you love and find them here.";
+        wishlistContents.replaceChildren(emptyMessage);
+        return;
+    }
+
+    wishlistContents.replaceChildren(...wishlistItems.map(createWishlistItem));
+}
+
 try {
     cartItems = readCart(localStorage.getItem(cartStorageKey));
 } catch (error) {
@@ -191,7 +311,38 @@ try {
 updateCartBadge();
 renderCartPage();
 
+try {
+    wishlistItems = readWishlist(localStorage.getItem(wishlistStorageKey));
+} catch (error) {
+    wishlistStorageAvailable = false;
+    announceCartMessage("The saved wishlist could not be read. Wishlist changes will not be saved.");
+}
+
+updateWishlistBadge();
+renderWishlistPage();
+
 document.addEventListener("click", (event) => {
+    const saveButton = event.target.closest("button.save-button[data-product-id]");
+    if (saveButton) {
+        const productId = Number(saveButton.dataset.productId);
+        if (!Number.isInteger(productId) || productId < 1 || productId > 50) {
+            throw new RangeError(`Cannot save invalid product ${saveButton.dataset.productId} to the wishlist.`);
+        }
+
+        if (wishlistItems.includes(productId)) {
+            wishlistItems = wishlistItems.filter((savedProductId) => savedProductId !== productId);
+            announceCartMessage(`${saveButton.closest(".product-card").querySelector("h3, h2").textContent} removed from your wishlist.`);
+        } else {
+            wishlistItems.push(productId);
+            announceCartMessage(`${saveButton.closest(".product-card").querySelector("h3, h2").textContent} saved to your wishlist.`);
+        }
+
+        saveWishlist();
+        updateWishlistBadge();
+        renderWishlistPage();
+        return;
+    }
+
     const buyButton = event.target.closest("button.buy-button[data-product-id]");
 
     if (buyButton) {
@@ -203,6 +354,7 @@ document.addEventListener("click", (event) => {
         renderCartPage();
         const storageMessage = cartStorageAvailable ? "" : " The cart could not be saved in this browser.";
         announceCartMessage(`${productName} added to cart. ${getCartItemCount()} item${getCartItemCount() === 1 ? "" : "s"} in cart.${storageMessage}`);
+        window.location.assign("cart.html");
         return;
     }
 
@@ -235,15 +387,21 @@ document.addEventListener("click", (event) => {
 });
 
 window.addEventListener("storage", (event) => {
-    if (event.key !== cartStorageKey) {
-        return;
-    }
-
-    try {
-        cartItems = readCart(event.newValue);
-        updateCartBadge();
-        renderCartPage();
-    } catch (error) {
-        announceCartMessage("The cart was updated in another tab, but its saved data could not be read.");
+    if (event.key === cartStorageKey) {
+        try {
+            cartItems = readCart(event.newValue);
+            updateCartBadge();
+            renderCartPage();
+        } catch (error) {
+            announceCartMessage("The cart was updated in another tab, but its saved data could not be read.");
+        }
+    } else if (event.key === wishlistStorageKey) {
+        try {
+            wishlistItems = readWishlist(event.newValue);
+            updateWishlistBadge();
+            renderWishlistPage();
+        } catch (error) {
+            announceCartMessage("The wishlist was updated in another tab, but its saved data could not be read.");
+        }
     }
 });

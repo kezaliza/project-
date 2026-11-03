@@ -12,10 +12,31 @@ function getArrivalCategoryKey(card) {
 arrivalGrid.querySelectorAll(".product-card").forEach((card) => {
     card.dataset.category = getArrivalCategoryKey(card);
 
-    const price = document.createElement("p");
+    const price = document.createElement("span");
     price.className = "product-price";
     price.textContent = getProductPrice(Number(card.dataset.productId));
-    card.querySelector(".product-info").append(price);
+
+    const actions = document.createElement("div");
+    actions.className = "product-actions";
+
+    const buyButton = document.createElement("button");
+    buyButton.className = "shop-button buy-button";
+    buyButton.type = "button";
+    buyButton.dataset.productId = card.dataset.productId;
+    buyButton.textContent = "Buy now";
+
+    const saveButton = document.createElement("button");
+    saveButton.className = "save-button";
+    saveButton.type = "button";
+    saveButton.dataset.productId = card.dataset.productId;
+    saveButton.setAttribute("aria-label", `Save ${card.querySelector(".product-category").textContent} to wishlist`);
+    saveButton.textContent = "♡ Save";
+
+    actions.append(buyButton, saveButton);
+    const bottom = document.createElement("div");
+    bottom.className = "product-bottom";
+    bottom.append(price, actions);
+    card.querySelector(".product-info").append(bottom);
 });
 
 categoryFilters.addEventListener("click", (event) => {

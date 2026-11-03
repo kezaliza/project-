@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#111214">
+    <meta name="theme-color" content="#6B7556">
     <meta name="description" content="Discover phone accessories, chargers, audio and everyday tech at NE-electronics.">
     <title>NE-electronics | Tech for everyday</title>
     <link rel="stylesheet" href="shop.css">
@@ -23,13 +23,17 @@
             <nav class="main-nav" aria-label="Main navigation">
                 <a href="#shop">Shop</a>
                 <a href="new%20arrivals.html">New Arrivals</a>
-                <a href="#about">About</a>
+                <a href="about.html">About</a>
                 <a href="#contact">Contact</a>
             </nav>
             <div class="header-actions">
                 <button class="icon-link category-menu-toggle" type="button" aria-label="Browse product categories" aria-expanded="false" aria-controls="category-menu">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><path d="m16 16 4.2 4.2"></path></svg>
                 </button>
+                <a class="icon-link wishlist-link" href="wishlist.html" aria-label="Wishlist, 0 saved products">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 8.8c0 5.2-8.8 10.1-8.8 10.1S3.2 14 3.2 8.8a4.5 4.5 0 0 1 8.8-1.3 4.5 4.5 0 0 1 8.8 1.3Z"></path></svg>
+                    <span class="wishlist-count">0</span>
+                </a>
                 <a class="icon-link account-link" href="register.html" aria-label="Create account">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.3"></circle><path d="M5.5 20c.5-3.4 2.8-5.3 6.5-5.3s6 1.9 6.5 5.3"></path></svg>
                 </a>
@@ -82,14 +86,14 @@
                 <div class="product-grid" aria-live="polite"></div>
             </section>
 
-            <section class="feature-banner" id="about">
+            <section class="feature-banner">
                 <img src="../public/12.jpg" alt="Phone on a premium desk stand in a warm home setting">
                 <div class="feature-overlay"></div>
                 <div class="feature-copy">
                     <p class="eyebrow">A better way to power up</p>
                     <h2>Make room for<br>the little upgrades.</h2>
                     <p>Smart accessories. Effortless everyday.</p>
-                    <a class="button button-green" href="#shop">Browse accessories <span aria-hidden="true">→</span></a>
+                    <a class="button button-green" href="about.html">How to order <span aria-hidden="true">→</span></a>
                 </div>
             </section>
 
@@ -105,7 +109,31 @@
             </section>
         </div>
 
-        <section class="newsletter" id="contact">
+        <section class="contact-section" id="contact" aria-labelledby="contact-title">
+            <div class="contact-inner">
+                <div class="contact-intro">
+                    <p class="eyebrow">We’re here to help</p>
+                    <h2 id="contact-title">Let’s keep in touch.</h2>
+                    <p>Questions about an order or a product? Call us or find us on social media.</p>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-phone">
+                        <span class="contact-label">Call us</span>
+                        <a href="tel:0796485988">0796485988 <span aria-hidden="true">↗</span></a>
+                    </div>
+                    <div class="contact-social">
+                        <span class="contact-label">Follow us</span>
+                        <div class="contact-social-links">
+                            <a href="https://www.instagram.com/kezaliza379/" target="_blank" rel="noopener noreferrer" aria-label="Follow NE-electronics on Instagram">Instagram <span aria-hidden="true">↗</span></a>
+                            <a href="https://www.tiktok.com/@kezaliza379" target="_blank" rel="noopener noreferrer" aria-label="Follow NE-electronics on TikTok">TikTok <span aria-hidden="true">↗</span></a>
+                            <a href="https://www.pinterest.com/kezaliza379/" target="_blank" rel="noopener noreferrer" aria-label="Follow NE-electronics on Pinterest">Pinterest <span aria-hidden="true">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter" id="newsletter">
             <div class="newsletter-inner">
                 <div><p class="eyebrow">The good stuff, occasionally</p><h2>Stay in the loop.</h2><p>Get new arrivals and exclusive offers in your inbox.</p></div>
                 <form class="newsletter-form">
@@ -122,8 +150,7 @@
         <div class="footer-main">
             <a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">N<span>E</span></span><span>NE-electronics</span></a>
             <p class="footer-note">Useful little upgrades for a more connected everyday.</p>
-            <div class="footer-links"><h2>Explore</h2><a href="#shop">Shop all</a><a href="new%20arrivals.html">New arrivals</a><a href="#best-sellers">Best sellers</a></div>
-            <div class="footer-links"><h2>Here to help</h2><a href="#contact">Contact us</a><a href="#contact">Shipping & returns</a><a href="#about">Our story</a></div>
+            <div class="footer-links"><h2>Here to help</h2><a href="#contact">Contact us</a><a href="#newsletter">Shipping &amp; returns</a><a href="about.html">About &amp; how to order</a></div>
             <div class="footer-social"><h2>Follow along</h2><a href="https://www.instagram.com/kezaliza379/" aria-label="Instagram">ig</a><a href="https://www.tiktok.com/@kezaliza379" aria-label="TikTok">tk</a><a href="https://www.pinterest.com/kezaliza379/" aria-label="Pinterest">p</a></div>
         </div>
         <div class="footer-bottom"><span>© 2026 NE-electronics. All rights reserved.</span><span>Made for everyday connection.</span></div>

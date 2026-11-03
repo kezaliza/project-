@@ -55,13 +55,24 @@ function createProductCard(number) {
     price.className = "product-price";
     price.textContent = getProductPrice(number);
 
+    const actions = document.createElement("div");
+    actions.className = "product-actions";
+
     const buyButton = document.createElement("button");
     buyButton.className = "shop-button buy-button";
     buyButton.type = "button";
     buyButton.dataset.productId = String(number);
-    buyButton.textContent = "Buy";
+    buyButton.textContent = "Buy now";
 
-    bottom.append(price, buyButton);
+    const saveButton = document.createElement("button");
+    saveButton.className = "save-button";
+    saveButton.type = "button";
+    saveButton.dataset.productId = String(number);
+    saveButton.setAttribute("aria-label", `Save ${productCategory} ${number} to wishlist`);
+    saveButton.textContent = "♡ Save";
+
+    actions.append(buyButton, saveButton);
+    bottom.append(price, actions);
     info.append(category, name, bottom);
     card.append(imageLink, info);
 

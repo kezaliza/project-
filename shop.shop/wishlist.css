@@ -1,0 +1,30 @@
+.wishlist-page { min-height: 100vh; background: var(--champagne); }
+.wishlist-content { width: min(1120px, calc(100% - 64px)); margin: 0 auto; padding: 34px 0 70px; }
+.wishlist-content .catalog-back-link { margin-bottom: 27px; }
+.wishlist-heading { margin-bottom: 25px; }
+.wishlist-heading .eyebrow { margin-bottom: 7px; color: var(--antique-rose); }
+.wishlist-heading h1 { margin: 0; color: #302b32; font: 800 clamp(30px, 4vw, 42px)/1.15 "Manrope", sans-serif; letter-spacing: -1.2px; }
+.wishlist-heading > p:last-child { margin: 8px 0 0; color: #625b63; font-size: 13px; }
+.wishlist-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.wishlist-item { overflow: hidden; border: 1px solid var(--bisque); border-radius: 9px; background: #fff; box-shadow: 0 4px 14px rgba(40, 30, 38, .05); }
+.wishlist-item .product-image { height: auto; aspect-ratio: 1 / 1; }
+.wishlist-item .product-info { padding: 14px; }
+.wishlist-item .product-info h2 { margin: 0 0 12px; color: #302b32; font: 700 15px/1.35 "Manrope", sans-serif; }
+.wishlist-item .product-price { margin-bottom: 12px; }
+.wishlist-item-actions { display: flex; gap: 8px; }
+.wishlist-item-actions > button { flex: 1; min-width: 0; min-height: 37px; }
+.wishlist-empty-message { grid-column: 1 / -1; margin: 0; padding: 32px 20px; border: 1px solid var(--bisque); border-radius: 8px; color: #625b63; background: #fff; text-align: center; }
+
+@media (max-width: 900px) {
+    .wishlist-content { width: calc(100% - 40px); }
+    .wishlist-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    .wishlist-content { width: calc(100% - 32px); padding: 24px 0 45px; }
+    .wishlist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+    .wishlist-item .product-info { padding: 11px 9px; }
+    .wishlist-item .product-info h2 { font-size: 12px; }
+    .wishlist-item-actions { flex-direction: column; }
+    .wishlist-item-actions > button { width: 100%; }
+}

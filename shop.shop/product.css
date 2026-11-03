@@ -1,8 +1,8 @@
 .product-catalog-page {
     min-height: 100vh;
     background:
-        radial-gradient(ellipse at 85% 0, rgba(240, 128, 197, .12), transparent 34rem),
-        #f7f5f6;
+        radial-gradient(ellipse at 85% 0, rgba(200, 125, 135, .12), transparent 34rem),
+        #FBEAD6;
 }
 
 .product-catalog-page .catalog-page-content { padding-top: 30px; }
@@ -14,7 +14,7 @@
     justify-content: space-between;
     gap: 30px;
     padding: 25px 28px;
-    border: 1px solid rgba(240, 128, 197, .2);
+    border: 1px solid rgba(200, 125, 135, .2);
     border-radius: 12px;
     background: rgba(255, 255, 255, .86);
     box-shadow: 0 12px 35px rgba(50, 30, 43, .06);
@@ -53,9 +53,9 @@
     padding: 0 17px;
     border: 0;
     border-radius: 6px;
-    color: #fff;
+    color: #242126;
     background: var(--green);
-    box-shadow: 0 5px 14px rgba(240, 128, 197, .24);
+    box-shadow: 0 5px 14px rgba(200, 125, 135, .24);
     font-weight: 700;
     white-space: nowrap;
     cursor: pointer;
@@ -63,8 +63,9 @@
 }
 
 .product-upload-button:hover {
+    color: #fff;
     background: var(--deep-green);
-    box-shadow: 0 7px 18px rgba(240, 128, 197, .3);
+    box-shadow: 0 7px 18px rgba(200, 125, 135, .3);
     transform: translateY(-1px);
 }
 
@@ -86,7 +87,7 @@
 .category-filter {
     min-height: 38px;
     padding: 0 14px;
-    border: 1px solid #e8dce5;
+    border: 1px solid #E5BCA9;
     border-radius: 999px;
     color: #524952;
     background: #fff;
@@ -99,7 +100,7 @@
 .category-filter:hover,
 .category-filter.is-active {
     border-color: var(--green);
-    color: #fff;
+    color: #242126;
     background: var(--green);
 }
 
@@ -116,7 +117,7 @@
 }
 
 .product-catalog-page .product-card {
-    border-color: #eee8ed;
+    border-color: #E5BCA9;
     border-radius: 10px;
     box-shadow: 0 4px 14px rgba(40, 30, 38, .035);
 }

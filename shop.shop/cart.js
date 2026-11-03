@@ -25,6 +25,9 @@ let wishlistStorageAvailable = true;
 const cartContents = document.querySelector("#cart-items");
 const cartSummary = document.querySelector("#cart-summary");
 const wishlistContents = document.querySelector("#wishlist-items");
+const checkoutPanel = document.querySelector("#checkout-panel");
+const checkoutForm = document.querySelector("#checkout-form");
+const checkoutStatus = document.querySelector("#checkout-status");
 
 const cartAnnouncement = document.createElement("p");
 cartAnnouncement.className = "sr-only";
@@ -56,6 +59,12 @@ function readCart(value) {
 
 function getCartItemCount() {
     return Object.values(cartItems).reduce((total, quantity) => total + quantity, 0);
+}
+
+function getCartSubtotal() {
+    return Object.entries(cartItems).reduce((total, [productId, quantity]) => {
+        return total + Number(getProductPrice(Number(productId)).replace("$", "")) * quantity;
+    }, 0);
 }
 
 function updateCartBadge() {
@@ -218,18 +227,33 @@ function renderCartPage() {
         emptyMessage.textContent = "Your cart is empty.";
         cartContents.replaceChildren(emptyMessage);
         cartSummary.textContent = "";
+        if (checkoutPanel) {
+            checkoutPanel.hidden = true;
+        }
         return;
     }
 
     const items = entries.map(([productId, quantity]) => createCartItem(Number(productId), quantity));
-    const total = entries.reduce((sum, [productId, quantity]) => {
-        return sum + Number(getProductPrice(Number(productId)).slice(1)) * quantity;
-    }, 0);
+    const subtotal = getCartSubtotal();
+    const totals = document.createElement("div");
+    totals.className = "cart-totals";
+    const subtotalLabel = document.createElement("p");
+    subtotalLabel.className = "cart-subtotal";
+    subtotalLabel.textContent = `Subtotal: $${subtotal}`;
+    const deliveryNote = document.createElement("p");
+    deliveryNote.className = "cart-delivery-note";
+    deliveryNote.textContent = "Delivery fee will be confirmed before payment.";
     const totalLabel = document.createElement("p");
     totalLabel.className = "cart-total";
-    totalLabel.textContent = `Total: $${total}`;
+    totalLabel.textContent = `Estimated total (before delivery): $${subtotal}`;
+    const checkoutButton = document.createElement("button");
+    checkoutButton.className = "checkout-start";
+    checkoutButton.type = "button";
+    checkoutButton.dataset.checkoutAction = "start";
+    checkoutButton.textContent = "Proceed to checkout";
+    totals.append(subtotalLabel, deliveryNote, totalLabel);
     cartContents.replaceChildren(...items);
-    cartSummary.replaceChildren(totalLabel);
+    cartSummary.replaceChildren(totals, checkoutButton);
 }
 
 function createWishlistItem(productId) {
@@ -268,6 +292,7 @@ function createWishlistItem(productId) {
     buyButton.className = "shop-button buy-button";
     buyButton.type = "button";
     buyButton.dataset.productId = String(productId);
+    buyButton.dataset.checkoutDirect = "true";
     buyButton.textContent = "Buy now";
 
     const removeButton = document.createElement("button");
@@ -310,6 +335,10 @@ try {
 
 updateCartBadge();
 renderCartPage();
+if (checkoutPanel && new URLSearchParams(window.location.search).get("checkout") === "1" && getCartItemCount() > 0) {
+    checkoutPanel.hidden = false;
+    checkoutPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 try {
     wishlistItems = readWishlist(localStorage.getItem(wishlistStorageKey));
@@ -322,6 +351,14 @@ updateWishlistBadge();
 renderWishlistPage();
 
 document.addEventListener("click", (event) => {
+    const checkoutButton = event.target.closest("button[data-checkout-action='start']");
+    if (checkoutButton && checkoutPanel) {
+        checkoutPanel.hidden = false;
+        document.querySelector("#checkout-name").focus();
+        checkoutPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+    }
+
     const saveButton = event.target.closest("button.save-button[data-product-id]");
     if (saveButton) {
         const productId = Number(saveButton.dataset.productId);
@@ -343,18 +380,22 @@ document.addEventListener("click", (event) => {
         return;
     }
 
-    const buyButton = event.target.closest("button.buy-button[data-product-id]");
+    const buyButton = event.target.closest("button.buy-button[data-product-id], button.save-to-cart-button[data-product-id]");
 
     if (buyButton) {
         const productId = buyButton.dataset.productId;
-        const productName = buyButton.closest(".product-card").querySelector("h3").textContent;
+        const productCard = buyButton.closest(".product-card");
+        const productName = productCard
+            ? productCard.querySelector("h3, h2").textContent
+            : buyButton.dataset.productName;
         cartItems[productId] = (cartItems[productId] || 0) + 1;
         saveCart();
         updateCartBadge();
         renderCartPage();
         const storageMessage = cartStorageAvailable ? "" : " The cart could not be saved in this browser.";
         announceCartMessage(`${productName} added to cart. ${getCartItemCount()} item${getCartItemCount() === 1 ? "" : "s"} in cart.${storageMessage}`);
-        window.location.assign("cart.html");
+        const shouldOpenCheckout = buyButton.dataset.checkoutDirect === "true";
+        window.location.assign(shouldOpenCheckout ? "cart.html?checkout=1" : "cart.html");
         return;
     }
 
@@ -384,7 +425,46 @@ document.addEventListener("click", (event) => {
     saveCart();
     updateCartBadge();
     renderCartPage();
+    if (checkoutStatus) {
+        checkoutStatus.textContent = "";
+    }
 });
+
+if (checkoutForm) {
+    checkoutForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (getCartItemCount() === 0) {
+            checkoutStatus.textContent = "Add a product to your cart before checking out.";
+            renderCartPage();
+            return;
+        }
+
+        const formData = new FormData(checkoutForm);
+        const orderLines = Object.entries(cartItems).map(([productId, quantity]) => {
+            const name = `${getCartProductCategory(Number(productId))} ${productId}`;
+            const unitPrice = Number(getProductPrice(Number(productId)).replace("$", ""));
+            return `${name} x ${quantity} — $${unitPrice * quantity}`;
+        });
+        const message = [
+            "New order request — NE-electronics",
+            "",
+            ...orderLines,
+            "",
+            `Subtotal: $${getCartSubtotal()}`,
+            "Delivery fee: To be confirmed",
+            `Customer: ${formData.get("name")}`,
+            `Phone: ${formData.get("phone")}`,
+            `Delivery address: ${formData.get("address")}`,
+            `Preferred payment method: ${formData.get("payment")}`,
+            "",
+            "Please confirm availability, delivery fee, total, and secure payment instructions."
+        ].join("\n");
+        const subject = encodeURIComponent("NE-electronics order request");
+        const body = encodeURIComponent(message);
+        checkoutStatus.textContent = "Your email app will open with the order request. Send the email to place your request; the shop will confirm payment instructions.";
+        window.location.href = `mailto:kezaliza379@gmail.com?subject=${subject}&body=${body}`;
+    });
+}
 
 window.addEventListener("storage", (event) => {
     if (event.key === cartStorageKey) {

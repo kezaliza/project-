@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#6B7556">
-    <meta name="description" content="Review your shopping cart and remove products whenever you like.">
+    <meta name="description" content="Review your cart total and send an order request to NE-electronics.">
     <title>Your Cart | NE-electronics</title>
     <link rel="stylesheet" href="shop.css">
     <link rel="stylesheet" href="cart.css">
@@ -36,11 +36,46 @@
             <a class="catalog-back-link" href="shop.html">← Continue shopping</a>
             <p class="eyebrow">Your selection</p>
             <h1>Your shopping cart</h1>
-            <p class="catalog-description">Change quantities or remove products before you continue shopping.</p>
+            <p class="catalog-description">Change quantities, check your total, and continue to checkout when ready.</p>
         </header>
         <section class="cart-content" aria-label="Shopping cart">
             <div class="cart-items" id="cart-items" aria-live="polite"></div>
             <div class="cart-summary" id="cart-summary" aria-live="polite"></div>
+            <section class="checkout-panel" id="checkout-panel" aria-labelledby="checkout-title" hidden>
+                <div class="checkout-heading">
+                    <p class="eyebrow">Almost there</p>
+                    <h2 id="checkout-title">Checkout</h2>
+                    <p>Share your contact and delivery details. The shop will confirm payment instructions with you.</p>
+                </div>
+                <form class="checkout-form" id="checkout-form">
+                    <div class="checkout-fields">
+                        <div class="checkout-field">
+                            <label for="checkout-name">Full name</label>
+                            <input id="checkout-name" name="name" type="text" autocomplete="name" required>
+                        </div>
+                        <div class="checkout-field">
+                            <label for="checkout-phone">Phone number</label>
+                            <input id="checkout-phone" name="phone" type="tel" autocomplete="tel" required>
+                        </div>
+                        <div class="checkout-field checkout-field-wide">
+                            <label for="checkout-address">Delivery address</label>
+                            <textarea id="checkout-address" name="address" rows="3" autocomplete="street-address" required></textarea>
+                        </div>
+                        <div class="checkout-field checkout-field-wide">
+                            <label for="checkout-payment">Preferred payment method</label>
+                            <select id="checkout-payment" name="payment" required>
+                                <option value="" selected disabled>Choose a payment method</option>
+                                <option value="Mobile Money">Mobile Money</option>
+                                <option value="Cash on delivery">Cash on delivery</option>
+                                <option value="Bank transfer">Bank transfer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="checkout-payment-note">This page does not process payments. We’ll confirm your order and share payment instructions directly. Never send a PIN, password, or one-time code.</p>
+                    <button class="button button-green checkout-submit" type="submit">Send order request <span aria-hidden="true">→</span></button>
+                    <p class="checkout-status" id="checkout-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
         </section>
     </main>
     <script src="pricing.js" defer></script>

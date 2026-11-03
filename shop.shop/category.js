@@ -56,6 +56,7 @@ function createCategoryProduct(category, number) {
     buyButton.className = "shop-button buy-button";
     buyButton.type = "button";
     buyButton.dataset.productId = String(number);
+    buyButton.dataset.checkoutDirect = "true";
     buyButton.textContent = "Buy now";
 
     const saveButton = document.createElement("button");

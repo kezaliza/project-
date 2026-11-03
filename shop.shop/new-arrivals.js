@@ -23,6 +23,7 @@ arrivalGrid.querySelectorAll(".product-card").forEach((card) => {
     buyButton.className = "shop-button buy-button";
     buyButton.type = "button";
     buyButton.dataset.productId = card.dataset.productId;
+    buyButton.dataset.checkoutDirect = "true";
     buyButton.textContent = "Buy now";
 
     const saveButton = document.createElement("button");

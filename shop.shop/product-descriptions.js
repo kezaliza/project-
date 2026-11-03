@@ -21,6 +21,10 @@ productDescriptionDialog.innerHTML = `
         <h2 id="product-description-title"></h2>
         <p class="product-description-price"></p>
         <p class="product-description-text"></p>
+        <div class="product-description-actions">
+            <button class="button button-green description-buy-button buy-button" type="button" data-checkout-direct="true">Buy now</button>
+            <button class="description-save-button save-to-cart-button" type="button">Save to cart</button>
+        </div>
     </div>
 `;
 document.body.append(productDescriptionDialog);
@@ -30,6 +34,8 @@ const descriptionCategory = productDescriptionDialog.querySelector(".product-des
 const descriptionTitle = productDescriptionDialog.querySelector("#product-description-title");
 const descriptionPrice = productDescriptionDialog.querySelector(".product-description-price");
 const descriptionText = productDescriptionDialog.querySelector(".product-description-text");
+const descriptionBuyButton = productDescriptionDialog.querySelector(".description-buy-button");
+const descriptionSaveButton = productDescriptionDialog.querySelector(".description-save-button");
 const descriptionCloseButton = productDescriptionDialog.querySelector(".product-description-close");
 let descriptionTrigger;
 
@@ -58,8 +64,22 @@ document.addEventListener("click", (event) => {
     descriptionTitle.textContent = name;
     descriptionPrice.textContent = getProductPrice(productId);
     descriptionText.textContent = productDescriptions[category];
+    descriptionBuyButton.dataset.productId = String(productId);
+    descriptionBuyButton.dataset.productName = name;
+    descriptionSaveButton.dataset.productId = String(productId);
+    descriptionSaveButton.dataset.productName = name;
+    descriptionBuyButton.setAttribute("aria-label", `Buy ${name} for ${getProductPrice(productId)} and continue to checkout`);
+    descriptionSaveButton.setAttribute("aria-label", `Save ${name} to your shopping cart`);
     productDescriptionDialog.showModal();
     descriptionCloseButton.focus();
+});
+
+descriptionBuyButton.addEventListener("click", () => {
+    productDescriptionDialog.close();
+});
+
+descriptionSaveButton.addEventListener("click", () => {
+    productDescriptionDialog.close();
 });
 
 descriptionCloseButton.addEventListener("click", () => {
